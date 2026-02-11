@@ -66,15 +66,47 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int? _lastNumber; // null means show nothing (required)
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home'),
+        leading: IconButton(
+          onPressed: null,
+          icon: const Icon(Icons.home),
+        ),
+        title: const Text('Random Number Generator'),
       ),
-      body: const Center(
-        child: Text('Welcome to Home Page'),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            children: [
+              const SizedBox(height: 16),
+              Expanded(
+                child: Center(
+                  child: _lastNumber == null
+                      ? const SizedBox.shrink()
+                      : Text('$_lastNumber', style: kBigNumberStyle),
+                ),
+              ),
+              ElevatedButton(
+                style: kElevatedButtonStyle,
+                onPressed: () {},
+                child: const Text('Generate'),
+              ),
+              const SizedBox(height: 10),
+              ElevatedButton(
+                style: kElevatedButtonStyle,
+                onPressed: () {},
+                child: const Text('View Statistics'),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
 }
+
